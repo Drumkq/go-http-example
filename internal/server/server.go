@@ -7,6 +7,7 @@ import (
 
 	"example.com/m/internal/config"
 	userApi "example.com/m/internal/server/api/v1"
+	"example.com/m/internal/server/middleware"
 	"github.com/gorilla/mux"
 )
 
@@ -23,9 +24,16 @@ func New(cfg *config.Config) (Server, error) {
 	}
 	outSrv := Server{router: r, server: srv}
 
+	outSrv.initMiddlewares()
 	outSrv.initApiV1()
 
 	return outSrv, nil
+}
+
+func (s *Server) initMiddlewares() {
+	s.router.Use(
+		middleware.ContentTypeMiddleware,
+	)
 }
 
 func (s *Server) initApiV1() {

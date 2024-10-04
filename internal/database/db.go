@@ -17,7 +17,7 @@ var DB *Database = nil
 
 func New(cfg *config.Config) (*Database, error) {
 	postgresConnection := fmt.Sprintf(
-		"host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
+		"host=%v port=%v user=%v dbname=%v password=%v sslmode=%v",
 		cfg.DbHost,
 		cfg.DbPort,
 		cfg.DbUser,
